@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VijaQuick - Cloud, Data & AI Education</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-blue': '#1e3a8a',
+                        'darker-blue': '#1e40af'
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="rgba(255,255,255,0.1)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><circle cx="20" cy="20" r="2" fill="url(%23a)"><animate attributeName="cy" values="20;80;20" dur="3s" repeatCount="indefinite"/></circle><circle cx="80" cy="80" r="2" fill="url(%23a)"><animate attributeName="cy" values="80;20;80" dur="4s" repeatCount="indefinite"/></circle><circle cx="40" cy="60" r="1" fill="url(%23a)"><animate attributeName="cx" values="40;60;40" dur="5s" repeatCount="indefinite"/></circle></svg>') center/cover;
+            opacity: 0.3;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hover-scale {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .hover-scale:hover {
+            transform: scale(1.02) translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Mobile-first responsive hover effects */
+        @media (min-width: 768px) {
+            .hover-scale:hover {
+                transform: scale(1.05) translateY(-10px);
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-in-left {
+            animation: slideInLeft 0.8s ease-out;
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .slide-in-right {
+            animation: slideInRight 0.8s ease-out;
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        /* Responsive animations */
+        @media (min-width: 768px) {
+            @keyframes slideInLeft {
+                from { opacity: 0; transform: translateX(-50px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+            @keyframes slideInRight {
+                from { opacity: 0; transform: translateX(50px); }
+                to { opacity: 1; transform: translateX(0); }
+            }
+        }
+        
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Larger floating animation on desktop */
+        @media (min-width: 768px) {
+            @keyframes floating {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-20px); }
+            }
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+            transition: box-shadow 0.3s ease;
+        }
+        .glow-effect:hover {
+            box-shadow: 0 0 25px rgba(102, 126, 234, 0.5);
+        }
+        
+        @media (min-width: 768px) {
+            .glow-effect {
+                box-shadow: 0 0 20px rgba(102, 126, 234, 0.4);
+            }
+            .glow-effect:hover {
+                box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
+            }
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .card-gradient {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        }
+        .nav-blur {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite alternate;
+        }
+        @keyframes pulseGlow {
+            from { box-shadow: 0 0 15px rgba(102, 126, 234, 0.3); }
+            to { box-shadow: 0 0 30px rgba(102, 126, 234, 0.6); }
+        }
+        
+        @media (min-width: 768px) {
+            @keyframes pulseGlow {
+                from { box-shadow: 0 0 20px rgba(102, 126, 234, 0.4); }
+                to { box-shadow: 0 0 40px rgba(102, 126, 234, 0.8); }
+            }
+        }
+        
+        .morphing-bg {
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .parallax-element {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+        .course-card-premium {
+            background: linear-gradient(145deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .course-card-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        .course-card-premium:hover::before {
+            left: 100%;
+        }
+        .course-card-standard {
+            background: linear-gradient(145deg, #1f2937 0%, #111827 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .course-card-standard::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s;
+        }
+        .course-card-standard:hover::before {
+            left: 100%;
+        }
+        .feature-item {
+            transition: all 0.3s ease;
+        }
+        .feature-item:hover {
+            transform: translateX(5px);
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+        }
+        
+        @media (min-width: 768px) {
+            .feature-item:hover {
+                transform: translateX(10px);
+            }
+        }
+        
+        /* Mobile-specific optimizations */
+        @media (max-width: 767px) {
+            .glass-effect {
+                backdrop-filter: blur(5px);
+            }
+            
+            /* Reduce animation intensity on mobile for better performance */
+            .morphing-bg {
+                animation-duration: 20s;
+            }
+            
+            /* Optimize text sizes for mobile readability */
+            .text-4xl { font-size: 2rem; }
+            .text-5xl { font-size: 2.5rem; }
+            .text-6xl { font-size: 3rem; }
+            .text-7xl { font-size: 3.5rem; }
+        }
+        
+        /* Touch-friendly button sizing */
+        @media (max-width: 767px) {
+            .mobile-touch-friendly {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+        
+        /* Improved modal responsiveness */
+        @media (max-width: 767px) {
+            .modal-content {
+                margin: 1rem;
+                max-height: calc(100vh - 2rem);
+            }
+        }
+        
+        /* Better spacing for mobile */
+        @media (max-width: 767px) {
+            .mobile-spacing {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+
+        /* FAQ Styles */
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 1.5rem;
+        }
+        .faq-content.show {
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            transition: max-height 0.3s ease-in;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+    <!-- Navigation -->
+    <nav class="nav-blur shadow-xl sticky top-0 z-50 border-b border-white/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <img src="https://github.com/Vijaquick/vijaquick/raw/main/vijaquick%20logo.jpg" alt="VijaQuick Logo" class="h-10 w-auto mr-3 rounded-full glow-effect" onerror="this.style.display='none'">
+                    <span class="text-xl font-bold text-gradient">VijaQuick</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6">
+                        <a href="#home" class="text-gray-700 hover:text-purple-600 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-purple-50 hover:scale-105">Home</button>
+                        <a href="#about" class="text-gray-700 hover:text-purple-600 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-purple-50 hover:scale-105">About</button>
+                        <a href="#courses" class="text-gray-700 hover:text-purple-600 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-purple-50 hover:scale-105">Courses</button>
+                        <a href="#contact" class="text-gray-700 hover:text-purple-600 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-purple-50 hover:scale-105">Contact</a>
+                        <a href="https://topmate.io/vijaquick" target="_blank" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 hover:from-purple-700 hover:to-blue-700 hover:scale-105 shadow-lg glow-effect">
+                            <i class="fas fa-shopping-cart mr-2"></i>Buy Courses
+                        </a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-700 hover:text-blue-900">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t shadow-lg">
+            <div class="px-3 pt-3 pb-4 space-y-2">
+                <a href="#home" class="mobile-touch-friendly text-gray-700 hover:text-blue-900 hover:bg-blue-50 block px-4 py-3 rounded-lg text-base font-medium transition-colors">Home</a>
+                <a href="#about" class="mobile-touch-friendly text-gray-700 hover:text-blue-900 hover:bg-blue-50 block px-4 py-3 rounded-lg text-base font-medium transition-colors">About</a>
+                <a href="#courses" class="mobile-touch-friendly text-gray-700 hover:text-blue-900 hover:bg-blue-50 block px-4 py-3 rounded-lg text-base font-medium transition-colors">Courses</a>
+                <a href="#contact" class="mobile-touch-friendly text-gray-700 hover:text-blue-900 hover:bg-blue-50 block px-4 py-3 rounded-lg text-base font-medium transition-colors">Contact</a>
+                <a href="https://topmate.io/vijaquick" target="_blank" class="mobile-touch-friendly bg-gradient-to-r from-purple-600 to-blue-600 text-white block px-4 py-3 rounded-lg text-base font-bold mt-3 text-center">
+                    <i class="fas fa-shopping-cart mr-2"></i>Buy Courses
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="morphing-bg text-white py-12 sm:py-16 lg:py-20 min-h-screen flex items-center relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+                <div class="w-full lg:w-1/2 text-center lg:text-left slide-in-left">
+                    <div class="glass-effect rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8">
+                        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight">Meet <span class="text-yellow-300">Vignesan</span></h1>
+                        <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl mb-4 sm:mb-6 text-pink-200 font-semibold">Founder of VijaQuick</h2>
+                        <p class="text-base sm:text-lg lg:text-xl mb-6 sm:mb-8 leading-relaxed text-white/90">Empowering learners with practical cloud, data, and AI skills for real-world success</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 max-w-lg mx-auto lg:mx-0">
+                        <a href="#courses" class="mobile-touch-friendly bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded-full font-bold hover:from-yellow-500 hover:to-orange-600 transition-all duration-300 text-center shadow-2xl hover-scale pulse-glow text-sm sm:text-base">
+                            <i class="fas fa-rocket mr-2"></i>View Courses
+                        </a>
+                        <a href="https://www.youtube.com/@vijaquick" target="_blank" class="mobile-touch-friendly glass-effect border-2 border-pink-300/50 text-white px-6 sm:px-8 lg:px-10 py-3 sm:py-4 rounded-full font-bold hover:bg-pink-500/20 transition-all duration-300 text-center hover-scale text-sm sm:text-base">
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                            <span class="hidden sm:inline">YouTube Channel</span>
+                            <span class="sm:hidden">YouTube</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 flex justify-center slide-in-right mt-8 lg:mt-0">
+                    <div class="relative floating">
+                        <div class="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-full glass-effect p-3 sm:p-4 shadow-2xl pulse-glow">
+                            <img src="https://raw.githubusercontent.com/Vijaquick/vijaquick/main/vignesan%20profile%20pic1.jpg" alt="Vignesan" class="w-full h-full rounded-full object-cover border-2 sm:border-4 border-white/30" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjMyMCIgdmlld0JveD0iMCAwIDMyMCAzMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iMzIwIiByeD0iMTYwIiBmaWxsPSIjMUUzQThBIi8+Cjx0ZXh0IHg9IjE2MCIgeT0iMTgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSI4MCIgZm9udC1mYW1pbHk9IkFyaWFsIj5WPC90ZXh0Pgo8L3N2Zz4K'; this.alt='Vignesan Profile'">
+                        </div>
+                        <div class="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 lg:-bottom-6 lg:-right-6 bg-gradient-to-r from-yellow-400 to-orange-500 text-white p-3 sm:p-4 lg:p-6 rounded-full shadow-2xl pulse-glow">
+                            <svg class="w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 14l9-5-9-5-9 5 9 5z"/>
+                                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                            </svg>
+                        </div>
+                        <!-- Floating elements - hidden on small screens for better performance -->
+                        <div class="hidden sm:block absolute -top-2 -left-2 sm:-top-4 sm:-left-4 w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 bg-pink-400 rounded-full opacity-70 floating" style="animation-delay: -1s;"></div>
+                        <div class="hidden sm:block absolute top-6 -right-4 sm:top-10 sm:-right-8 w-3 h-3 sm:w-4 sm:h-4 lg:w-6 lg:h-6 bg-pink-500 rounded-full opacity-60 floating" style="animation-delay: -2s;"></div>
+                        <div class="hidden sm:block absolute -bottom-1 -left-4 sm:-bottom-2 sm:-left-8 w-2 h-2 sm:w-3 sm:h-3 lg:w-4 lg:h-4 bg-pink-300 rounded-full opacity-80 floating" style="animation-delay: -0.5s;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section id="about" class="py-20 bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-purple-400/10 to-pink-400/10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="card-gradient p-10 rounded-3xl shadow-2xl hover-scale border border-purple-200/50">
+                    <div class="flex items-center mb-8">
+                        <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-6 rounded-2xl mr-6 glow-effect">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-4xl font-bold text-gradient">Mission</h3>
+                    </div>
+                    <p class="text-gray-700 text-xl leading-relaxed font-medium">"To help <span class="text-purple-600 font-bold">1 million learners</span> become confident in cloud, data, and AI skills."</p>
+                </div>
+                <div class="card-gradient p-10 rounded-3xl shadow-2xl hover-scale border border-blue-200/50">
+                    <div class="flex items-center mb-8">
+                        <div class="bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-6 rounded-2xl mr-6 glow-effect">
+                            <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-4xl font-bold text-gradient">Vision</h3>
+                    </div>
+                    <p class="text-gray-700 text-xl leading-relaxed font-medium">"To become the <span class="text-blue-600 font-bold">most trusted platform</span> for practical data engineering education, bridging the gap between learning and real-world implementation."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 bg-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gradient mb-6 sm:mb-8 leading-relaxed px-4" style="line-height: 1.3;">About Vignesan</h2>
+                <div class="w-24 sm:w-32 h-1.5 sm:h-2 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6 sm:mb-8 rounded-full"></div>
+                <div class="flex justify-center space-x-3 sm:space-x-4 mb-6 sm:mb-8">
+                    <div class="w-2 h-2 sm:w-3 sm:h-3 bg-purple-400 rounded-full floating"></div>
+                    <div class="w-2 h-2 sm:w-3 sm:h-3 bg-pink-400 rounded-full floating" style="animation-delay: -0.5s;"></div>
+                    <div class="w-2 h-2 sm:w-3 sm:h-3 bg-blue-400 rounded-full floating" style="animation-delay: -1s;"></div>
+                </div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div class="space-y-8">
+                    <!-- Experience Highlight -->
+                    <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-3xl border border-blue-200/50">
+                        <h3 class="text-2xl font-bold text-gradient mb-6">
+                            <i class="fas fa-briefcase text-blue-600 mr-3"></i>
+                            Experience
+                        </h3>
+                        <p class="text-gray-700 text-lg leading-relaxed mb-4">
+                            With over <strong class="text-blue-900">4 years of experience</strong> in data engineering and cloud technologies, Vignesan has worked with big companies like <strong class="text-purple-900">PepsiCo, Tiger Analytics, and Hexacorp</strong>, building scalable data solutions.
+                        </p>
+                        <p class="text-gray-600">
+                            Learn practical skills from real industry projects that employers actually need.
+                        </p>
+                    </div>
+
+                    <!-- Learning Path -->
+                    <div class="bg-gradient-to-r from-green-50 to-blue-50 p-8 rounded-3xl border border-green-200/50">
+                        <h3 class="text-2xl font-bold text-gradient mb-6">
+                            <i class="fas fa-rocket text-green-600 mr-3"></i>
+                            What You'll Get
+                        </h3>
+                        <div class="space-y-3">
+                            <p class="text-gray-700">✅ Hands-on projects for your portfolio</p>
+                            <p class="text-gray-700">✅ Job-ready skills from SQL to Azure</p>
+                            <p class="text-gray-700">✅ Real-world scenarios and applications</p>
+                            <p class="text-gray-700">✅ 100+ companies DE interview questions material and cheat sheet</p>
+                            <p class="text-gray-700">✅ Scenario-based question and answer documents</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Content - Visual Element -->
+                <div class="bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 text-white p-8 rounded-3xl shadow-2xl hover-scale relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent"></div>
+                    
+                    <div class="relative z-10">
+                        <h3 class="text-2xl font-bold mb-6 flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-3"></i>
+                            Why VijaQuick?
+                        </h3>
+                        
+                        <div class="space-y-5">
+                            <div class="flex items-start">
+                                <div class="bg-blue-500 p-2 rounded-lg mr-4 flex-shrink-0">
+                                    <i class="fas fa-building text-white text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-blue-300 mb-1">Industry Experience</h4>
+                                    <p class="text-gray-300 text-sm">Learn from Fortune 500 company experience</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="bg-purple-500 p-2 rounded-lg mr-4 flex-shrink-0">
+                                    <i class="fas fa-code text-white text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-purple-300 mb-1">Real Projects</h4>
+                                    <p class="text-gray-300 text-sm">Build portfolio projects for interviews</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="bg-green-500 p-2 rounded-lg mr-4 flex-shrink-0">
+                                    <i class="fas fa-headset text-white text-sm"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-green-300 mb-1">Personal Support</h4>
+                                    <p class="text-gray-300 text-sm">1:1 doubt sessions and career guidance</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scholarship & Support Programs -->
+    <section class="py-20 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-green-400/5 to-purple-400/5"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-6xl font-bold text-gradient mb-8 leading-tight">Scholarship & Support Programs</h2>
+                <div class="w-32 h-2 bg-gradient-to-r from-green-500 to-purple-500 mx-auto mb-8 rounded-full"></div>
+                <p class="text-2xl text-gray-600 font-medium max-w-4xl mx-auto leading-relaxed">At VijaQuick, we believe education should be accessible to everyone, especially those from <span class="text-green-600 font-bold">challenging backgrounds</span></p>
+                <div class="flex justify-center space-x-6 mt-8">
+                    <div class="w-4 h-4 bg-green-400 rounded-full floating"></div>
+                    <div class="w-4 h-4 bg-blue-400 rounded-full floating" style="animation-delay: -0.5s;"></div>
+                    <div class="w-4 h-4 bg-purple-400 rounded-full floating" style="animation-delay: -1s;"></div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Children of Farmers -->
+                <div class="card-gradient rounded-3xl shadow-2xl overflow-hidden hover-scale border border-green-200/50 relative">
+                    <div class="bg-gradient-to-r from-green-600 to-emerald-600 text-white p-6 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
+                        <div class="relative z-10 text-center">
+                            <div class="text-5xl mb-4">🌱</div>
+                            <h3 class="text-xl font-bold mb-2">Children of Farmers</h3>
+                            <div class="bg-yellow-400 text-green-800 px-4 py-2 rounded-full text-lg font-bold">
+                                10% OFF
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700 text-center font-medium">Additional discount on all courses for children of farmers</p>
+                    </div>
+                </div>
+
+                <!-- First-Generation Graduates -->
+                <div class="card-gradient rounded-3xl shadow-2xl overflow-hidden hover-scale border border-blue-200/50 relative">
+                    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
+                        <div class="relative z-10 text-center">
+                            <div class="text-5xl mb-4">🎓</div>
+                            <h3 class="text-xl font-bold mb-2">First-Generation Graduates</h3>
+                            <div class="bg-yellow-400 text-blue-800 px-4 py-2 rounded-full text-lg font-bold">
+                                10% OFF
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700 text-center font-medium">Special support for first in family to graduate</p>
+                    </div>
+                </div>
+
+                <!-- Financially Challenged Families -->
+                <div class="card-gradient rounded-3xl shadow-2xl overflow-hidden hover-scale border border-purple-200/50 relative">
+                    <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
+                        <div class="relative z-10 text-center">
+                            <div class="text-5xl mb-4">👨‍👩‍👧</div>
+                            <h3 class="text-xl font-bold mb-2">Financially Challenged</h3>
+                            <div class="bg-yellow-400 text-purple-800 px-4 py-2 rounded-full text-lg font-bold">
+                                10% OFF
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700 text-center font-medium">Support for students from financially challenged families</p>
+                    </div>
+                </div>
+
+                <!-- Students without Parents -->
+                <div class="card-gradient rounded-3xl shadow-2xl overflow-hidden hover-scale border border-orange-200/50 relative">
+                    <div class="bg-gradient-to-r from-orange-600 to-red-600 text-white p-6 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
+                        <div class="relative z-10 text-center">
+                            <div class="text-5xl mb-4">🙏</div>
+                            <h3 class="text-xl font-bold mb-2">Students without Parents</h3>
+                            <div class="bg-yellow-400 text-orange-800 px-3 py-2 rounded-full text-sm font-bold">
+                                FREE + Pay Later
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-700 text-center font-medium">Free training now, pay after securing a job</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Important Note -->
+            <div class="mt-16 bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-3xl border border-blue-200/50 text-center">
+                <div class="flex items-center justify-center mb-4">
+                    <svg class="w-8 h-8 text-blue-600 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    <h3 class="text-2xl font-bold text-blue-900">Important Note</h3>
+                </div>
+                <p class="text-gray-700 text-lg font-medium">
+                    <strong>Proof of eligibility will be required to claim these benefits.</strong> 
+                    We're committed to supporting deserving students and ensuring these programs reach those who need them most.
+                </p>
+                <div class="mt-6">
+                    <a href="https://wa.me/917598804746?text=Hi%20VijaQuick!%20I%20would%20like%20to%20apply%20for%20your%20scholarship%20programs.%20Please%20let%20me%20know%20about%20the%20eligibility%20requirements%20and%20application%20process.%20I%20am%20interested%20in%20the%20following%20category:%0A%0A%F0%9F%8C%B1%20Children%20of%20Farmers%0A%F0%9F%8E%93%20First-Generation%20Graduate%0A%F0%9F%91%A8%E2%80%8D%F0%9F%91%A9%E2%80%8D%F0%9F%91%A7%20Financially%20Challenged%20Family%0A%F0%9F%99%8F%20Student%20without%20Parents%0A%0APlease%20guide%20me%20through%20the%20next%20steps.%20Thank%20you!" target="_blank" class="inline-flex items-center bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 shadow-lg hover-scale">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                        </svg>
+                        Apply for Scholarship
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="py-20 bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-indigo-400/5 to-pink-400/5"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12 sm:mb-16 lg:mb-20">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gradient mb-6 sm:mb-8 px-4">Our Courses</h2>
+                <div class="w-24 sm:w-32 h-1.5 sm:h-2 bg-gradient-to-r from-indigo-500 to-pink-500 mx-auto mb-6 sm:mb-8 rounded-full"></div>
+                <p class="text-lg sm:text-xl lg:text-2xl text-gray-600 font-medium px-4">Transform your career with <span class="text-purple-600 font-bold">industry-relevant skills</span></p>
+                <div class="flex justify-center space-x-4 sm:space-x-6 mt-6 sm:mt-8">
+                    <div class="w-3 h-3 sm:w-4 sm:h-4 bg-indigo-400 rounded-full floating"></div>
+                    <div class="w-3 h-3 sm:w-4 sm:h-4 bg-purple-400 rounded-full floating" style="animation-delay: -0.5s;"></div>
+                    <div class="w-3 h-3 sm:w-4 sm:h-4 bg-pink-400 rounded-full floating" style="animation-delay: -1s;"></div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
+                <!-- ADE Full Course -->
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden hover-scale border border-purple-200/50 relative">
+                    <!-- Premium Badge -->
+                    <div class="absolute top-4 right-4 z-20">
+                        <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                            <i class="fas fa-crown mr-1"></i>PREMIUM
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-premium text-white p-4 sm:p-6 lg:p-8 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/10 to-transparent"></div>
+                        <div class="relative z-10">
+                            <div class="flex flex-col sm:flex-row items-center sm:items-start mb-4 sm:mb-6">
+                                <div class="bg-white/20 p-3 sm:p-4 rounded-xl sm:rounded-2xl mb-3 sm:mb-0 sm:mr-4">
+                                    <i class="fas fa-graduation-cap text-2xl sm:text-3xl text-yellow-300"></i>
+                                </div>
+                                <div class="text-center sm:text-left">
+                                    <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold">ADE Full Course</h3>
+                                    <p class="text-purple-200 text-sm sm:text-base">Complete Data Engineering Program</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row items-center justify-between mb-4 gap-3 sm:gap-0">
+                                <div class="text-center sm:text-left">
+                                    <span class="text-2xl sm:text-3xl lg:text-4xl font-bold">₹10,000</span>
+                                    <span class="text-purple-200 line-through ml-2 sm:ml-3 text-lg sm:text-xl">₹15,000</span>
+                                </div>
+                                <div class="bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-bold pulse-glow">
+                                    Save ₹5,000
+                                </div>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-sm rounded-xl sm:rounded-2xl p-3 sm:p-4">
+                                <p class="text-xs sm:text-sm text-white/90 text-center sm:text-left">🚀 Most Popular Choice - Complete career transformation package</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 sm:p-6 lg:p-8">
+                        <div class="space-y-3 sm:space-y-4 mb-8 sm:mb-10">
+                            <div class="feature-item flex items-center p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl sm:rounded-2xl">
+                                <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium text-sm sm:text-base">📹 Recorded video sessions</span>
+                            </div>
+                            <div class="feature-item flex items-center p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl sm:rounded-2xl">
+                                <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium text-sm sm:text-base">❓ Doubt clarification sessions</span>
+                            </div>
+                            <div class="feature-item flex items-center p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl sm:rounded-2xl">
+                                <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium text-sm sm:text-base">🚀 Real-time project build support</span>
+                            </div>
+                            <div class="feature-item flex items-center p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl sm:rounded-2xl">
+                                <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium text-sm sm:text-base">📚 Study materials</span>
+                            </div>
+                            <div class="feature-item flex items-center p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl sm:rounded-2xl">
+                                <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium text-sm sm:text-base">💼 Scenario-based interview questions</span>
+                            </div>
+                            <div class="feature-item flex items-center p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl sm:rounded-2xl">
+                                <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium text-sm sm:text-base">📄 Resume building</span>
+                            </div>
+                            <div class="feature-item flex items-center p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl sm:rounded-2xl">
+                                <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium text-sm sm:text-base">🌐 Personal resume website + free hosting lifetime</span>
+                            </div>
+                            <div class="feature-item flex items-center p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl sm:rounded-2xl">
+                                <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium text-sm sm:text-base">📋 20+ resume templates</span>
+                            </div>
+                            <div class="feature-item flex items-center p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl sm:rounded-2xl">
+                                <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium text-sm sm:text-base">💼 LinkedIn profile optimization</span>
+                            </div>
+                            <div class="feature-item flex items-center p-3 sm:p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl sm:rounded-2xl">
+                                <div class="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium text-sm sm:text-base">🎯 Job search guidance</span>
+                            </div>
+                        </div>
+                        <a href="https://topmate.io/vijaquick" target="_blank" class="mobile-touch-friendly w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 sm:py-5 rounded-xl sm:rounded-2xl font-bold text-lg sm:text-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 shadow-2xl hover-scale pulse-glow block text-center">
+                            <i class="fas fa-rocket mr-2"></i>Enroll Now
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Interview Preparation -->
+                <div class="bg-white rounded-3xl shadow-2xl overflow-hidden hover-scale border border-gray-200/50 relative">
+                    <!-- Professional Badge -->
+                    <div class="absolute top-4 right-4 z-20">
+                        <div class="bg-gradient-to-r from-gray-600 to-gray-800 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">
+                            <i class="fas fa-briefcase mr-1"></i>PROFESSIONAL
+                        </div>
+                    </div>
+                    
+                    <div class="course-card-standard text-white p-8 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-r from-white/5 to-transparent"></div>
+                        <div class="relative z-10">
+                            <div class="flex items-center mb-6">
+                                <div class="bg-white/10 p-4 rounded-2xl mr-4">
+                                    <i class="fas fa-briefcase text-3xl text-yellow-300"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-3xl font-bold">Interview Preparation</h3>
+                                    <p class="text-gray-300">Job-Ready Interview Skills</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <span class="text-4xl font-bold">₹7,500</span>
+                                    <span class="text-gray-400 line-through ml-3 text-xl">₹10,000</span>
+                                </div>
+                                <div class="bg-gradient-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold pulse-glow">
+                                    Save ₹2,500
+                                </div>
+                            </div>
+                            <div class="bg-white/5 backdrop-blur-sm rounded-2xl p-4">
+                                <p class="text-sm text-white/90">🎯 Perfect for experienced professionals seeking new opportunities</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-8">
+                        <div class="space-y-4 mb-10">
+                            <div class="feature-item flex items-center p-4 bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl">
+                                <div class="w-3 h-3 bg-gradient-to-r from-gray-600 to-black rounded-full mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium">💼 Scenario-based interview questions</span>
+                            </div>
+                            <div class="feature-item flex items-center p-4 bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl">
+                                <div class="w-3 h-3 bg-gradient-to-r from-gray-600 to-black rounded-full mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium">👨‍🏫 5-days 1:1 KT sessions</span>
+                            </div>
+                            <div class="feature-item flex items-center p-4 bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl">
+                                <div class="w-3 h-3 bg-gradient-to-r from-gray-600 to-black rounded-full mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium">❓ Interview questions</span>
+                            </div>
+                            <div class="feature-item flex items-center p-4 bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl">
+                                <div class="w-3 h-3 bg-gradient-to-r from-gray-600 to-black rounded-full mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium">📄 Resume building</span>
+                            </div>
+                            <div class="feature-item flex items-center p-4 bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl">
+                                <div class="w-3 h-3 bg-gradient-to-r from-gray-600 to-black rounded-full mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium">📋 20+ resume templates</span>
+                            </div>
+                            <div class="feature-item flex items-center p-4 bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl">
+                                <div class="w-3 h-3 bg-gradient-to-r from-gray-600 to-black rounded-full mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium">💼 LinkedIn profile optimization</span>
+                            </div>
+                            <div class="feature-item flex items-center p-4 bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl">
+                                <div class="w-3 h-3 bg-gradient-to-r from-gray-600 to-black rounded-full mr-4 flex-shrink-0"></div>
+                                <span class="text-gray-700 font-medium">🎯 Job search guidance</span>
+                            </div>
+                        </div>
+                        <a href="https://topmate.io/vijaquick" target="_blank" class="w-full bg-gradient-to-r from-gray-800 to-black text-white py-5 rounded-2xl font-bold text-xl hover:from-gray-900 hover:to-gray-800 transition-all duration-300 shadow-2xl hover-scale pulse-glow block text-center">
+                            <i class="fas fa-briefcase mr-2"></i>Enroll Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-black/10 to-transparent"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20">
+                <h2 class="text-6xl font-bold mb-8">Get In Touch</h2>
+                <div class="w-32 h-2 bg-gradient-to-r from-yellow-400 to-pink-400 mx-auto mb-8 rounded-full"></div>
+                <p class="text-2xl text-white/90 font-medium">Ready to start your <span class="text-yellow-300 font-bold">learning journey?</span></p>
+                <div class="flex justify-center space-x-6 mt-8">
+                    <div class="w-4 h-4 bg-yellow-400 rounded-full floating"></div>
+                    <div class="w-4 h-4 bg-pink-400 rounded-full floating" style="animation-delay: -0.5s;"></div>
+                    <div class="w-4 h-4 bg-blue-400 rounded-full floating" style="animation-delay: -1s;"></div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div class="mb-20">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold mb-6">Frequently Asked Questions</h3>
+                    <div class="w-24 h-1 bg-gradient-to-r from-yellow-400 to-pink-400 mx-auto mb-6 rounded-full"></div>
+                    <p class="text-xl text-white/90">Get answers to common questions about our courses and programs</p>
+                </div>
+                
+                <div class="max-w-4xl mx-auto space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="glass-effect rounded-2xl overflow-hidden border border-white/20">
+                        <button class="faq-button w-full text-left p-6 flex justify-between items-center transition-all duration-300" data-target="faq1">
+                            <span class="text-lg font-semibold text-white">Are the courses really free?</span>
+                            <svg id="faq1-icon" class="faq-icon w-6 h-6 text-white transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="faq1" class="faq-content text-white/90">
+                            <p class="leading-relaxed">No, our courses are premium paid programs designed to provide comprehensive, industry-level training. We offer two main courses: the ADE Full Course (₹10,000) and Interview Preparation (₹7,500). However, we do provide scholarship programs with up to 10% discounts for eligible students from farming families, first-generation graduates, and financially challenged backgrounds.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 2 -->
+                    <div class="glass-effect rounded-2xl overflow-hidden border border-white/20">
+                        <button class="faq-button w-full text-left p-6 flex justify-between items-center transition-all duration-300" data-target="faq2">
+                            <span class="text-lg font-semibold text-white">Do you provide certificates?</span>
+                            <svg id="faq2-icon" class="faq-icon w-6 h-6 text-white transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="faq2" class="faq-content text-white/90">
+                            <p class="leading-relaxed">Yes! Upon successful completion of our courses, you'll receive a certificate of completion from VijaQuick. More importantly, you'll have hands-on project experience and a portfolio that demonstrates your practical skills to potential employers - which is often more valuable than certificates alone.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 3 -->
+                    <div class="glass-effect rounded-2xl overflow-hidden border border-white/20">
+                        <button class="faq-button w-full text-left p-6 flex justify-between items-center transition-all duration-300" data-target="faq3">
+                            <span class="text-lg font-semibold text-white">Can I get one-on-one mentoring?</span>
+                            <svg id="faq3-icon" class="faq-icon w-6 h-6 text-white transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="faq3" class="faq-content text-white/90">
+                            <p class="leading-relaxed">Absolutely! Both our courses include personalized support. The ADE Full Course includes doubt clarification sessions and real-time project build support. The Interview Preparation course includes 5 days of 1:1 KT (Knowledge Transfer) sessions. We also provide resume building, LinkedIn optimization, and job search guidance on a personal level.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 4 -->
+                    <div class="glass-effect rounded-2xl overflow-hidden border border-white/20">
+                        <button class="faq-button w-full text-left p-6 flex justify-between items-center transition-all duration-300" data-target="faq4">
+                            <span class="text-lg font-semibold text-white">How often do you upload new content?</span>
+                            <svg id="faq4-icon" class="faq-icon w-6 h-6 text-white transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="faq4" class="faq-content text-white/90">
+                            <p class="leading-relaxed">We regularly update our course content to stay current with industry trends and technologies. New modules and updates are added monthly, and we continuously refresh our interview questions database based on the latest industry requirements. Students get lifetime access to all updates for their enrolled courses.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 5 -->
+                    <div class="glass-effect rounded-2xl overflow-hidden border border-white/20">
+                        <button class="faq-button w-full text-left p-6 flex justify-between items-center transition-all duration-300" data-target="faq5">
+                            <span class="text-lg font-semibold text-white">What is the cost of the mentorship program?</span>
+                            <svg id="faq5-icon" class="faq-icon w-6 h-6 text-white transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="faq5" class="faq-content text-white/90">
+                            <p class="leading-relaxed">Our mentorship is included in both course packages. The ADE Full Course (₹10,000) includes comprehensive mentorship throughout your learning journey. The Interview Preparation course (₹7,500) includes focused 1:1 mentoring sessions. We don't charge separately for mentorship - it's part of our commitment to your success.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 6 -->
+                    <div class="glass-effect rounded-2xl overflow-hidden border border-white/20">
+                        <button class="faq-button w-full text-left p-6 flex justify-between items-center transition-all duration-300" data-target="faq6">
+                            <span class="text-lg font-semibold text-white">What technologies do you cover in your courses?</span>
+                            <svg id="faq6-icon" class="faq-icon w-6 h-6 text-white transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="faq6" class="faq-content text-white/90">
+                            <p class="leading-relaxed">We cover the complete data engineering stack: SQL, Python, Azure Data Factory, Azure Databricks, Azure Synapse Analytics, Power BI, Apache Spark, Delta Lake, and more. Our curriculum is based on real-world industry requirements from companies like PepsiCo, Tiger Analytics, and other Fortune 500 companies where our founder has worked.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 7 -->
+                    <div class="glass-effect rounded-2xl overflow-hidden border border-white/20">
+                        <button class="faq-button w-full text-left p-6 flex justify-between items-center transition-all duration-300" data-target="faq7">
+                            <span class="text-lg font-semibold text-white">Do you help with job placement?</span>
+                            <svg id="faq7-icon" class="faq-icon w-6 h-6 text-white transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="faq7" class="faq-content text-white/90">
+                            <p class="leading-relaxed">Yes! We provide comprehensive job search support including resume building, LinkedIn profile optimization, interview preparation with 100+ real company questions, and job search guidance. We also help you build a portfolio website with free lifetime hosting. While we don't guarantee job placement, we equip you with all the tools and skills needed to succeed in your job search.</p>
+                        </div>
+                    </div>
+
+                    <!-- FAQ Item 8 -->
+                    <div class="glass-effect rounded-2xl overflow-hidden border border-white/20">
+                        <button class="faq-button w-full text-left p-6 flex justify-between items-center transition-all duration-300" data-target="faq8">
+                            <span class="text-lg font-semibold text-white">Can beginners join your programs?</span>
+                            <svg id="faq8-icon" class="faq-icon w-6 h-6 text-white transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div id="faq8" class="faq-content text-white/90">
+                            <p class="leading-relaxed">Absolutely! Our ADE Full Course is designed for beginners and takes you from zero to job-ready. We start with fundamentals and gradually build up to advanced concepts. The course includes hands-on projects, doubt clarification sessions, and personal mentoring to ensure you understand every concept. No prior experience in data engineering is required - just enthusiasm to learn!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-3xl font-bold mb-8">Contact Information</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center p-4 bg-blue-800 rounded-lg">
+                            <svg class="w-6 h-6 text-blue-300 mr-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                            <a href="tel:7598804746" class="text-lg hover:text-blue-300 transition-colors font-semibold">+91 7598804746</a>
+                        </div>
+                        <div class="flex items-center p-4 bg-blue-800 rounded-lg">
+                            <svg class="w-6 h-6 text-blue-300 mr-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            <a href="mailto:vijaquick@gmail.com" class="text-lg hover:text-blue-300 transition-colors font-semibold">vijaquick@gmail.com</a>
+                        </div>
+                    </div>
+                    
+                    <h3 class="text-3xl font-bold mb-8 mt-12">Follow Us</h3>
+                    <div class="flex space-x-6">
+                        <a href="https://www.youtube.com/@vijaquick" target="_blank" class="bg-red-600 p-4 rounded-full hover:bg-red-700 transition-colors hover-scale">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/vijaquick/" target="_blank" class="bg-pink-600 p-4 rounded-full hover:bg-pink-700 transition-colors hover-scale">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/company/vijaquick" target="_blank" class="bg-blue-600 p-4 rounded-full hover:bg-blue-700 transition-colors hover-scale">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-white text-gray-900 p-8 rounded-xl shadow-lg">
+                    <h3 class="text-3xl font-bold mb-6 text-blue-900">Chat with Us</h3>
+                    <div class="text-center">
+                        <div class="mb-6">
+                            <svg class="w-20 h-20 mx-auto text-green-500 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                            </svg>
+                            <h4 class="text-2xl font-bold text-gray-800 mb-2">WhatsApp Support</h4>
+                            <p class="text-gray-600 mb-6">Get instant responses to your queries. Chat with us directly on WhatsApp for course information, enrollment, and support.</p>
+                        </div>
+                        <a href="https://wa.me/917598804746?text=Hi%20VijaQuick!%20I'm%20interested%20in%20learning%20more%20about%20your%20courses." target="_blank" class="inline-flex items-center bg-green-500 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-green-600 transition-colors duration-300 shadow-lg hover-scale">
+                            <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.890-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                            </svg>
+                            Chat on WhatsApp
+                        </a>
+                        <p class="text-sm text-gray-500 mt-4">Available 24/7 for your convenience</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Logo and Description -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center mb-4">
+                        <img src="https://github.com/Vijaquick/vijaquick/raw/main/vijaquick%20logo.jpg" alt="VijaQuick Logo" class="h-12 w-auto mr-3" onerror="this.style.display='none'">
+                        <span class="text-2xl font-bold">VijaQuick</span>
+                    </div>
+                    <p class="text-gray-300 mb-6 max-w-md">Empowering data professionals with practical skills for real-world success.</p>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#about" class="text-gray-300 hover:text-white transition-colors">About</a></li>
+                        <li><a href="#courses" class="text-gray-300 hover:text-white transition-colors">Courses</a></li>
+                        <li><a href="https://www.youtube.com/@vijaquick" target="_blank" class="text-gray-300 hover:text-white transition-colors">YouTube</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Legal and Contact -->
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Legal</h4>
+                    <ul class="space-y-2 mb-6">
+                        <li><button type="button" data-modal-target="refundModal" class="text-gray-300 hover:text-white transition-colors cursor-pointer">Refund Policy</button></li>
+                        <li><button type="button" data-modal-target="termsModal" class="text-gray-300 hover:text-white transition-colors cursor-pointer">Terms & Conditions</button></li>
+                        <li><button type="button" data-modal-target="privacyModal" class="text-gray-300 hover:text-white transition-colors cursor-pointer">Privacy Policy</button></li>
+                    </ul>
+                    
+                    <h4 class="text-lg font-bold mb-4">Contact</h4>
+                    <div class="space-y-2">
+                        <p class="text-gray-300">
+                            <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                            vijaquick@gmail.com
+                        </p>
+                        <p class="text-gray-300">
+                            <svg class="w-4 h-4 inline mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                            </svg>
+                            +91 7598804746
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center">
+                <p class="text-gray-300">© 2025 VijaQuick. All rights reserved. Made with ❤️ for the data community.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Policy Modals -->
+    <!-- Refund Policy Modal -->
+    <div id="refundModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-2 sm:p-4">
+        <div class="modal-content bg-white rounded-lg sm:rounded-xl max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-y-auto">
+            <div class="p-4 sm:p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-900">Refund Policy</h2>
+                    <button onclick="closeModal('refundModal')" class="mobile-touch-friendly text-gray-500 hover:text-gray-700 text-xl sm:text-2xl p-2">&times;</button>
+                </div>
+            </div>
+            <div class="p-4 sm:p-6 text-gray-700 space-y-3 sm:space-y-4">
+                <p class="text-base sm:text-lg font-semibold">Effective Date: January 1, 2025</p>
+                
+                <h3 class="text-lg sm:text-xl font-bold text-blue-900 mt-4 sm:mt-6">1. Refund Eligibility</h3>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Refunds are available within <strong>7 days</strong> of course enrollment</li>
+                    <li>Course content must not have been accessed beyond 20% of the total material</li>
+                    <li>Refund requests must be submitted via email to vijaquick@gmail.com</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">2. Non-Refundable Items</h3>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Completed courses (100% content accessed)</li>
+                    <li>Courses purchased more than 7 days ago</li>
+                    <li>Digital materials that have been downloaded</li>
+                    <li>One-on-one consultation sessions that have been conducted</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">3. Refund Process</h3>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Submit refund request to vijaquick@gmail.com with order details</li>
+                    <li>Refunds will be processed within 5-7 business days</li>
+                    <li>Refunds will be credited to the original payment method</li>
+                    <li>Processing fees (if any) are non-refundable</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">4. Special Circumstances</h3>
+                <p>We may consider refunds beyond the standard policy in cases of:</p>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Technical issues preventing course access</li>
+                    <li>Medical emergencies (documentation required)</li>
+                    <li>Course content significantly different from description</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">5. Contact Information</h3>
+                <p>For refund requests or questions, contact us at:</p>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Email: vijaquick@gmail.com</li>
+                    <li>Phone: +91 7598804746</li>
+                    <li>Response time: Within 24 hours</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms & Conditions Modal -->
+    <div id="termsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-3xl font-bold text-blue-900">Terms & Conditions</h2>
+                    <button onclick="closeModal('termsModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                </div>
+            </div>
+            <div class="p-6 text-gray-700 space-y-4">
+                <p class="text-lg font-semibold">Effective Date: January 1, 2025</p>
+                
+                <h3 class="text-xl font-bold text-blue-900 mt-6">1. Acceptance of Terms</h3>
+                <p>By enrolling in VijaQuick courses, you agree to these Terms & Conditions. If you do not agree, please do not use our services.</p>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">2. Course Access & Usage</h3>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Course access is granted for personal, non-commercial use only</li>
+                    <li>Sharing login credentials or course materials is strictly prohibited</li>
+                    <li>Course access is valid for 12 months from enrollment date</li>
+                    <li>We reserve the right to revoke access for policy violations</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">3. Intellectual Property</h3>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>All course content is proprietary to VijaQuick</li>
+                    <li>Recording, copying, or distributing content is prohibited</li>
+                    <li>Students may take notes for personal use only</li>
+                    <li>Violation may result in legal action</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">4. Payment Terms</h3>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>All payments must be made in full before course access</li>
+                    <li>Prices are subject to change without notice</li>
+                    <li>Payment disputes must be raised within 30 days</li>
+                    <li>We accept major credit cards and digital payments</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">5. Student Responsibilities</h3>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Maintain confidentiality of login credentials</li>
+                    <li>Respect other students and instructors</li>
+                    <li>Provide accurate information during enrollment</li>
+                    <li>Report technical issues promptly</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">6. Limitation of Liability</h3>
+                <p>VijaQuick provides courses "as is" and makes no guarantees about employment outcomes. Our liability is limited to the course fee paid.</p>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">7. Modifications</h3>
+                <p>We reserve the right to modify these terms at any time. Changes will be communicated via email and website updates.</p>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">8. Contact Information</h3>
+                <p>For questions about these terms:</p>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Email: vijaquick@gmail.com</li>
+                    <li>Phone: +91 7598804746</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-3xl font-bold text-blue-900">Privacy Policy</h2>
+                    <button onclick="closeModal('privacyModal')" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+                </div>
+            </div>
+            <div class="p-6 text-gray-700 space-y-4">
+                <p class="text-lg font-semibold">Effective Date: January 1, 2025</p>
+                
+                <h3 class="text-xl font-bold text-blue-900 mt-6">1. Information We Collect</h3>
+                <h4 class="font-semibold">Personal Information:</h4>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Name, email address, phone number</li>
+                    <li>Payment information (processed securely)</li>
+                    <li>Educational background and career goals</li>
+                    <li>Course progress and completion data</li>
+                </ul>
+
+                <h4 class="font-semibold mt-4">Technical Information:</h4>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>IP address, browser type, device information</li>
+                    <li>Course access logs and usage patterns</li>
+                    <li>Cookies and similar tracking technologies</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">2. How We Use Your Information</h3>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Provide and improve our educational services</li>
+                    <li>Process payments and manage enrollments</li>
+                    <li>Send course updates and educational content</li>
+                    <li>Provide customer support and technical assistance</li>
+                    <li>Analyze usage patterns to enhance user experience</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">3. Information Sharing</h3>
+                <p>We do not sell or rent your personal information. We may share data with:</p>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Payment processors for transaction processing</li>
+                    <li>Email service providers for communications</li>
+                    <li>Analytics services to improve our platform</li>
+                    <li>Legal authorities when required by law</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">4. Data Security</h3>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>SSL encryption for all data transmission</li>
+                    <li>Secure servers with regular security updates</li>
+                    <li>Limited access to personal information</li>
+                    <li>Regular security audits and monitoring</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">5. Your Rights</h3>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Access your personal information</li>
+                    <li>Correct inaccurate data</li>
+                    <li>Request deletion of your data</li>
+                    <li>Opt-out of marketing communications</li>
+                    <li>Data portability upon request</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">6. Cookies Policy</h3>
+                <p>We use cookies to:</p>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Remember your login status</li>
+                    <li>Track course progress</li>
+                    <li>Analyze website usage</li>
+                    <li>Personalize your experience</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">7. Data Retention</h3>
+                <p>We retain your information for:</p>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Active accounts: Duration of service use</li>
+                    <li>Inactive accounts: 3 years from last activity</li>
+                    <li>Payment records: 7 years for tax purposes</li>
+                    <li>Marketing data: Until you opt-out</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">8. Children's Privacy</h3>
+                <p>Our services are not intended for children under 13. We do not knowingly collect information from children under 13.</p>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">9. International Users</h3>
+                <p>Your information may be transferred to and processed in countries other than your own. We ensure appropriate safeguards are in place.</p>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">10. Contact Us</h3>
+                <p>For privacy-related questions or requests:</p>
+                <ul class="list-disc pl-6 space-y-2">
+                    <li>Email: vijaquick@gmail.com</li>
+                    <li>Phone: +91 7598804746</li>
+                    <li>Subject line: "Privacy Policy Inquiry"</li>
+                </ul>
+
+                <h3 class="text-xl font-bold text-blue-900 mt-6">11. Policy Updates</h3>
+                <p>We may update this policy periodically. Changes will be posted on our website and communicated via email for significant updates.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('[id$="Modal"]').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal(this.id);
+                }
+            });
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('[id$="Modal"]').forEach(modal => {
+                    if (!modal.classList.contains('hidden')) {
+                        closeModal(modal.id);
+                    }
+                });
+            }
+        });
+
+        // FAQ Toggle Function
+        function toggleFAQ(faqId) {
+            const content = document.getElementById(faqId);
+            const icon = document.getElementById(faqId + '-icon');
+            
+            // Close all other FAQs first
+            document.querySelectorAll('.faq-content').forEach(otherContent => {
+                if (otherContent.id !== faqId && otherContent.classList.contains('show')) {
+                    otherContent.classList.remove('show');
+                    const otherIcon = document.getElementById(otherContent.id + '-icon');
+                    if (otherIcon) {
+                        otherIcon.style.transform = 'rotate(0deg)';
+                    }
+                }
+            });
+            
+            // Toggle current FAQ
+            if (content.classList.contains('show')) {
+                content.classList.remove('show');
+                if (icon) {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            } else {
+                content.classList.add('show');
+                if (icon) {
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            }
+        }
+</script>
+<script>
+(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'975a260d255a936b',t:'MTc1NjI4MjgxNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+
+<script>
+  function toggleFAQ(id) {
+    const content = document.getElementById(id);
+    const icon = document.getElementById(id + "-icon");
+    
+    if (!content) return;
+    
+    if (content.classList.contains("show")) {
+      content.classList.remove("show");
+      if (icon) icon.style.transform = "rotate(0deg)";
+    } else {
+      // Close all other FAQs
+      document.querySelectorAll(".faq-content").forEach(faq => faq.classList.remove("show"));
+      document.querySelectorAll(".faq-icon").forEach(icon => icon.style.transform = "rotate(0deg)");
+      
+      // Open selected
+      content.classList.add("show");
+      if (icon) icon.style.transform = "rotate(180deg)";
+    }
+  }
+</script>
+
+<script>
+(function(){
+  function closeAllFAQs(){
+    document.querySelectorAll('.faq-content.show').forEach(c => c.classList.remove('show'));
+    document.querySelectorAll('.faq-icon').forEach(i => { if(i) i.style.transform = 'rotate(0deg)'; });
+  }
+  function toggleById(id){
+    const content = document.getElementById(id);
+    const icon = document.getElementById(id + "-icon");
+    if(!content) return;
+    if(content.classList.contains('show')){
+      content.classList.remove('show');
+      if(icon) icon.style.transform = 'rotate(0deg)';
+    } else {
+      closeAllFAQs();
+      content.classList.add('show');
+      if(icon) icon.style.transform = 'rotate(180deg)';
+    }
+  }
+  // Expose for backward compatibility
+  window.toggleFAQ = toggleById;
+
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.faq-button[data-target]').forEach(btn => {
+      btn.addEventListener('click', function(e){
+        const id = this.getAttribute('data-target');
+        if(id) toggleById(id);
+      });
+    });
+  });
+})();
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Mobile menu toggle
+  const menuBtn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  if (menuBtn && menu) {
+    menuBtn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+  }
+
+  // Footer legal buttons
+  const legalButtons = document.querySelectorAll("footer button");
+  legalButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const content = btn.nextElementSibling;
+      if (content) {
+        content.classList.toggle("hidden");
+      }
+      // Rotate arrow if exists
+      const svg = btn.querySelector("svg");
+      if (svg) {
+        svg.classList.toggle("rotate-180");
+      }
+    });
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Wire up footer/modal buttons (data-modal-target)
+  document.querySelectorAll('[data-modal-target]').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const modalId = this.getAttribute('data-modal-target');
+      if (modalId) {
+        // Try to open modal using existing openModal function; fallback to basic show
+        if (typeof openModal === 'function') {
+          openModal(modalId);
+        } else {
+          const m = document.getElementById(modalId);
+          if (m) {
+            m.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+          }
+        }
+      }
+    });
+  });
+});
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Ensure modal close buttons work
+  document.querySelectorAll('[data-modal-close]').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const modal = this.closest('.fixed');
+      if (modal) {
+        modal.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    });
+  });
+
+  // Optional: close modal when clicking outside content
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.add('hidden');
+        document.body.style.overflow = 'auto';
+      }
+    });
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Mobile menu toggle
+  const menuBtn = document.querySelector("[data-collapse-toggle]") || document.getElementById("mobile-menu-btn");
+  if (menuBtn) {
+    const targetId = menuBtn.getAttribute("data-collapse-toggle") || "mobile-menu";
+    const menu = document.getElementById(targetId);
+    if (menu) {
+      menuBtn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+      });
+    }
+  }
+});
+</script>
